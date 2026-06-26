@@ -1,0 +1,41 @@
+---
+name: Skolens arbeidsplan
+strategy: polling
+polling_verb: get
+
+# GitHub Pages site for this repo. {{ school }} and {{ trinn }} are filled
+# from the form fields below.
+polling_url: https://thomasrolfsnes.github.io/trmnl_barneskole_arbeidsplaner/{{ school }}/trinn-{{ trinn }}.json
+polling_headers: ''
+
+# Edge-to-edge: the plan image fills the whole screen.
+no_screen_padding: 'yes'
+dark_mode: 'no'
+
+# Plans change weekly; poll every 6 hours. The screen only re-renders when the
+# polled data actually changes (the image URL carries a content hash).
+refresh_interval: 360
+framework_version: latest
+
+custom_fields:
+  - keyname: school
+    field_type: select
+    name: Skole
+    description: Velg skole
+    options:
+      - Minde skole: minde
+    default: minde
+
+  - keyname: trinn
+    field_type: select
+    name: Trinn
+    description: Velg klassetrinn
+    options:
+      - "1. trinn": 1
+      - "2. trinn": 2
+      - "3. trinn": 3
+      - "4. trinn": 4
+      - "5. trinn": 5
+      - "6. trinn": 6
+      - "7. trinn": 7
+    default: 1

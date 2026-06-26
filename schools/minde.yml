@@ -1,0 +1,21 @@
+# Minde skole (Bergen kommune)
+# Each grade ("trinn") has a heading on one of the grade-band pages, followed by
+# a download link to that week's plan PDF (an /api/rest/filer/V<id> URL that
+# changes weekly). The scraper finds the heading, then the next matching link.
+id: minde
+name: Minde skole
+base_url: https://www.bergen.kommune.no
+
+pages:
+  - url: /omkommunen/avdelinger/minde-skole/arbeidsplaner/smaskoletrinnet-1-4
+    trinn: [1, 2, 3, 4]
+  - url: /omkommunen/avdelinger/minde-skole/arbeidsplaner/mellomtrinnet-5-7
+    trinn: [5, 6, 7]
+
+link:
+  # {trinn} is substituted per grade, e.g. "1. trinn".
+  heading_pattern: '^\s*{trinn}\.\s*trinn'
+  href_pattern: '/api/rest/filer/'
+
+render:
+  page: 1  # weekly plan is on page 1 (A4 landscape)

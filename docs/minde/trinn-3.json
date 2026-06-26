@@ -1,0 +1,15 @@
+{
+  "school": "minde",
+  "school_name": "Minde skole",
+  "trinn": 3,
+  "trinn_label": "3. trinn",
+  "available": true,
+  "uke": "25 + 26",
+  "title": "Uke 25 + 26",
+  "image_url": "https://thomasrolfsnes.github.io/trmnl_barneskole_arbeidsplaner/minde/trinn-3.png?v=7c19e081bfd7",
+  "source_pdf": "https://www.bergen.kommune.no/api/rest/filer/V70317163",
+  "source_page": "https://www.bergen.kommune.no/omkommunen/avdelinger/minde-skole/arbeidsplaner/smaskoletrinnet-1-4",
+  "device": "trmnl_x_landscape",
+  "content_hash": "7c19e081bfd7",
+  "updated": "2026-06-26T17:31:20+00:00"
+}

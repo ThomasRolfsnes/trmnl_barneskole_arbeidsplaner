@@ -1,0 +1,19 @@
+[project]
+name = "trmnl-arbeidsplan"
+version = "0.1.0"
+description = "Scrape school weekly-plan PDFs and render them as images for a TRMNL e-ink display."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pypdfium2>=4.30,<5",
+    "Pillow>=10.1,<12",
+    "requests>=2.31",
+    "beautifulsoup4>=4.12",
+    "PyYAML>=6",
+]
+
+[dependency-groups]
+dev = []
+
+[tool.uv]
+package = false

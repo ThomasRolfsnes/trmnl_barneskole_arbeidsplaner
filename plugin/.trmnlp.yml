@@ -1,0 +1,24 @@
+---
+watch:
+  - .trmnlp.yml
+  - src
+
+framework_version: latest
+
+# Test values for the form fields during local preview (`trmnlp serve`).
+custom_fields:
+  school: minde
+  trinn: 1
+
+# Local preview before GitHub Pages is live — supply merge data directly so the
+# markup renders without polling. Point image_url at a locally served PNG:
+#   1) uv run scraper/build.py --base-url http://localhost:8000
+#   2) (cd docs && python -m http.server 8000)
+# then uncomment:
+# variables:
+#   available: true
+#   image_url: http://localhost:8000/minde/trinn-1.png
+#   uke: "26"
+#   title: "Uke 26"
+#   trinn_label: "1. trinn"
+#   school_name: "Minde skole"

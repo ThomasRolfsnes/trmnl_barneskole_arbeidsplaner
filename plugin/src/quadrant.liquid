@@ -1,0 +1,8 @@
+<div class="layout layout--col" style="height:100%;justify-content:center;text-align:center;">
+  <span class="title">{{ trinn_label }}</span>
+  {% if available %}
+    <span class="value">Uke {{ uke }}</span>
+  {% else %}
+    <span class="description description--small">Ingen plan</span>
+  {% endif %}
+</div>

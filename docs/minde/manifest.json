@@ -1,0 +1,65 @@
+{
+  "school": "minde",
+  "school_name": "Minde skole",
+  "device": "trmnl_x_landscape",
+  "source": "https://www.bergen.kommune.no",
+  "generated": "2026-06-26T17:31:06+00:00",
+  "classes": [
+    {
+      "trinn": 1,
+      "trinn_label": "1. trinn",
+      "available": true,
+      "uke": "26",
+      "image_url": "https://thomasrolfsnes.github.io/trmnl_barneskole_arbeidsplaner/minde/trinn-1.png?v=6336d19d84f8",
+      "updated": "2026-06-26T17:31:12+00:00"
+    },
+    {
+      "trinn": 2,
+      "trinn_label": "2. trinn",
+      "available": true,
+      "uke": "26",
+      "image_url": "https://thomasrolfsnes.github.io/trmnl_barneskole_arbeidsplaner/minde/trinn-2.png?v=86d0eb18754a",
+      "updated": "2026-06-26T17:31:20+00:00"
+    },
+    {
+      "trinn": 3,
+      "trinn_label": "3. trinn",
+      "available": true,
+      "uke": "25 + 26",
+      "image_url": "https://thomasrolfsnes.github.io/trmnl_barneskole_arbeidsplaner/minde/trinn-3.png?v=7c19e081bfd7",
+      "updated": "2026-06-26T17:31:20+00:00"
+    },
+    {
+      "trinn": 4,
+      "trinn_label": "4. trinn",
+      "available": true,
+      "uke": "25 og 26",
+      "image_url": "https://thomasrolfsnes.github.io/trmnl_barneskole_arbeidsplaner/minde/trinn-4.png?v=33a5426d544d",
+      "updated": "2026-06-26T17:31:30+00:00"
+    },
+    {
+      "trinn": 5,
+      "trinn_label": "5. trinn",
+      "available": true,
+      "uke": "26",
+      "image_url": "https://thomasrolfsnes.github.io/trmnl_barneskole_arbeidsplaner/minde/trinn-5.png?v=e48317fb9e22",
+      "updated": "2026-06-26T17:31:31+00:00"
+    },
+    {
+      "trinn": 6,
+      "trinn_label": "6. trinn",
+      "available": true,
+      "uke": "26",
+      "image_url": "https://thomasrolfsnes.github.io/trmnl_barneskole_arbeidsplaner/minde/trinn-6.png?v=65c6593cd145",
+      "updated": "2026-06-26T17:31:34+00:00"
+    },
+    {
+      "trinn": 7,
+      "trinn_label": "7. trinn",
+      "available": true,
+      "uke": "26",
+      "image_url": "https://thomasrolfsnes.github.io/trmnl_barneskole_arbeidsplaner/minde/trinn-7.png?v=b8c58011de14",
+      "updated": "2026-06-26T17:31:41+00:00"
+    }
+  ]
+}

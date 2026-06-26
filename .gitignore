@@ -1,0 +1,16 @@
+# Python / uv
+.venv/
+__pycache__/
+*.pyc
+
+# Local scratch
+scratch/
+sample*.pdf
+sample*.png
+page*.html
+
+# TRMNL local build
+plugin/_build/
+
+# OS
+.DS_Store

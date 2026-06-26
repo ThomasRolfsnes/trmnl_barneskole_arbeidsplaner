@@ -1,0 +1,14 @@
+<div class="layout layout--col" style="height:100%;justify-content:center;">
+  <span class="title">{{ trinn_label }}</span>
+  {% if available %}
+    <span class="value value--small">Uke {{ uke }}</span>
+    <span class="description description--small">Åpne full skjerm for hele planen</span>
+  {% else %}
+    <span class="description">Ingen plan publisert</span>
+  {% endif %}
+</div>
+
+<div class="title_bar">
+  <span class="title">{{ school_name }}</span>
+  <span class="instance">Arbeidsplan</span>
+</div>
