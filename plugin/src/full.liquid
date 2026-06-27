@@ -1,3 +1,10 @@
+{% comment %}
+  Uses the polled JSON (image_url, available, ...), which TRMNL exposes as
+  top-level Liquid variables. The polling URL (settings.yml) interpolates the
+  school/trinn form fields — the instance must have those values selected and
+  SAVED (defaults don't auto-apply to the poll). Form fields are not available
+  directly in markup, so we render the polled image_url.
+{% endcomment %}
 {% if available %}
   <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#fff;">
     <img src="{{ image_url }}"

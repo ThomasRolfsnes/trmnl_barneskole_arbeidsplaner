@@ -140,3 +140,11 @@ extend `scraper/scrape.py` with a per-school strategy).
   pick a different one.
 - **Be polite.** The cron runs once a day and skips downloads when the weekly
   link is unchanged.
+- **TRMNL plugin gotchas.** The polling URL interpolates the `school`/`trinn`
+  form fields, but the plugin **instance must have those values selected and
+  saved** — defaults are not applied to the poll (an unset field → `.../<empty>/
+  trinn-.json` → 404). Form fields are not readable in markup; the views render
+  the **polled JSON** (`{{ image_url }}`, `{{ available }}`, …). Select option
+  values must be flat scalars matching the `docs/<id>` folder names. If field
+  interpolation misbehaves, hardcode the polling URL per instance and run one
+  instance per grade.

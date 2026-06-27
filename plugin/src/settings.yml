@@ -3,8 +3,10 @@ name: Skolens arbeidsplan
 strategy: polling
 polling_verb: get
 
-# GitHub Pages site for this repo. {{ school }} and {{ trinn }} are filled
-# from the form fields below.
+# {{ school }} and {{ trinn }} are filled from the form fields below. IMPORTANT:
+# the plugin INSTANCE must have Skole/Trinn explicitly selected and saved — the
+# form-field defaults are NOT applied to the polling URL automatically (an unset
+# field interpolates to empty, giving .../<empty>/trinn-.json -> 404).
 polling_url: https://thomasrolfsnes.github.io/trmnl_barneskole_arbeidsplaner/{{ school }}/trinn-{{ trinn }}.json
 polling_headers: ''
 
@@ -17,27 +19,29 @@ dark_mode: 'no'
 refresh_interval: 360
 framework_version: latest
 
+# Form-fields format (verified against TRMNL's form builder):
+#  - paste just the list below (without the `custom_fields:` line) into the UI
+#  - option dashes align with the `options:` key (deeper nesting is rejected)
+#  - select options must be FLAT scalars, not "Label: value" maps; the value is
+#    shown as the label, so values must equal the docs/<id> folder names
+#  - keyname must match the polling_url variables ({{ school }}, {{ trinn }})
 custom_fields:
   - keyname: school
-    field_type: select
     name: Skole
+    field_type: select
     description: Velg skole
     options:
-      - Minde skole: minde
-      - Nordnes skole: nordnes
-      - Alvøen skole: alvoen
+    - minde
+    - nordnes
+    - alvoen
     default: minde
-
+  # trinn is a number field, not a select: select option keys like "1. trinn"
+  # (digit + period) break TRMNL's form-builder YAML parser.
   - keyname: trinn
-    field_type: select
     name: Trinn
-    description: Velg klassetrinn
-    options:
-      - "1. trinn": 1
-      - "2. trinn": 2
-      - "3. trinn": 3
-      - "4. trinn": 4
-      - "5. trinn": 5
-      - "6. trinn": 6
-      - "7. trinn": 7
-    default: 1
+    field_type: number
+    description: Velg klassetrinn (1-7)
+    default: "1"
+    min: 1
+    max: 7
+    step: 1
