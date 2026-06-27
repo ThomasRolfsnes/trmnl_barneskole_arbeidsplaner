@@ -1,4 +1,4 @@
-name: Build arbeidsplan images
+name: Build & deploy arbeidsplaner
 
 on:
   schedule:
@@ -9,20 +9,29 @@ on:
     paths:
       - "scraper/**"
       - "schools/**"
+      - "docs/**"
       - "pyproject.toml"
       - "uv.lock"
       - ".github/workflows/build.yml"
 
+# Images are built fresh each run and published as an ephemeral Pages artifact —
+# nothing is committed to git, so there is no history bloat and removed
+# schools/grades simply stop being deployed.
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
-  group: build-arbeidsplan
-  cancel-in-progress: false
+  group: pages
+  cancel-in-progress: true
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -31,20 +40,20 @@ jobs:
         with:
           enable-cache: true
 
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
       - name: Render weekly plans
         env:
-          # Optional override; otherwise derived from the repo (owner.github.io/repo).
-          PAGES_BASE_URL: ${{ vars.PAGES_BASE_URL }}
+          PAGES_BASE_URL: ${{ steps.pages.outputs.base_url }}
         run: uv run scraper/build.py --device trmnl_x_landscape
 
-      - name: Commit & push if changed
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs
-          if git diff --cached --quiet; then
-            echo "No changes."
-          else
-            git commit -m "Update arbeidsplaner ($(date -u +%Y-%m-%dT%H:%MZ))"
-            git push
-          fi
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

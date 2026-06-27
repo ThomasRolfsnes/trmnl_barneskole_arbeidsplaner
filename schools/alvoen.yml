@@ -1,0 +1,26 @@
+# Alvøen skole (Bergen kommune)
+# The småtrinn (1-4) page marks grades up as <strong>1.trinn:</strong> rather than
+# <h*>, and the mellomtrinn (5-7) page uses <h5> headings. Both are covered by
+# treating <strong> as a heading tag. Plans here are monthly ("Juniplan"), so
+# there's no week number to compare — we just take the first PDF under each
+# heading (which also skips extra links like recipes). Grades without a heading
+# (e.g. 6/7 some weeks) fall back to placeholders.
+id: alvoen
+name: Alvøen skole
+base_url: https://www.bergen.kommune.no
+
+pages:
+  - url: /omkommunen/avdelinger/alvoen-skole/arbeidsplaner/smatrinn-1-4-trinn
+    trinn: [1, 2, 3, 4]
+  - url: /omkommunen/avdelinger/alvoen-skole/arbeidsplaner/mellomtrinn-5-7tr
+    trinn: [5, 6, 7]
+
+match: heading
+select: first
+heading_tags: [h1, h2, h3, h4, h5, h6, strong]
+link:
+  heading_pattern: '^\s*{trinn}\.\s*trinn'
+  href_pattern: '/api/rest/filer/'
+
+render:
+  page: 1

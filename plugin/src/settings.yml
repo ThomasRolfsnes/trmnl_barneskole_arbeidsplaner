@@ -24,6 +24,8 @@ custom_fields:
     description: Velg skole
     options:
       - Minde skole: minde
+      - Nordnes skole: nordnes
+      - Alvøen skole: alvoen
     default: minde
 
   - keyname: trinn

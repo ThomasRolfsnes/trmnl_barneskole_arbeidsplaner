@@ -1,0 +1,21 @@
+# Nordnes skole (Bergen kommune)
+# Per-grade headings ("1.trinn", no space) followed by one or more weekly PDFs.
+# Grades often list several weeks in arbitrary order, so we pick the highest week.
+id: nordnes
+name: Nordnes skole
+base_url: https://www.bergen.kommune.no
+
+pages:
+  - url: /omkommunen/avdelinger/nordnes-skole/arbeidsplaner/smatrinn-1-4
+    trinn: [1, 2, 3, 4]
+  - url: /omkommunen/avdelinger/nordnes-skole/arbeidsplaner/mellomtrinn-5-7
+    trinn: [5, 6, 7]
+
+match: heading
+select: max_week
+link:
+  heading_pattern: '^\s*{trinn}\.\s*trinn'
+  href_pattern: '/api/rest/filer/'
+
+render:
+  page: 1

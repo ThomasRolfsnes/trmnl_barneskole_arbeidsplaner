@@ -12,5 +12,11 @@ page*.html
 # TRMNL local build
 plugin/_build/
 
+# Generated GitHub Pages content — built in CI and deployed as an artifact,
+# never committed (no git history bloat). Keep only the static files.
+/docs/*
+!/docs/.nojekyll
+!/docs/robots.txt
+
 # OS
 .DS_Store

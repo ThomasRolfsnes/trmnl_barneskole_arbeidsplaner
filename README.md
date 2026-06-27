@@ -18,12 +18,11 @@ to add more schools easily.
 GitHub Actions (daily cron)
   └─ uv run scraper/build.py
        1. scrape each school page, map "N. trinn" → this week's PDF link
-       2. download the PDF (only when the weekly link changed)
-       3. render page 1 → grayscale PNG at the device resolution
-       4. write docs/<school>/trinn-N.png + trinn-N.json
-  └─ commit docs/ back to the repo
+       2. download the PDF, render page 1 → grayscale PNG (device resolution)
+       3. write docs/<school>/trinn-N.png + trinn-N.json
+  └─ upload docs/ as a Pages artifact and deploy it
         │
-GitHub Pages (serves docs/)
+GitHub Pages (serves the artifact)
   https://thomasrolfsnes.github.io/trmnl_barneskole_arbeidsplaner/<school>/trinn-N.png
         │
 TRMNL plugin (polling)
@@ -34,9 +33,11 @@ No always-on server: the rendering runs in the cron job, and the request path
 only serves a static PNG. Everything fits GitHub's free tier (public repo →
 unlimited Actions minutes + Pages).
 
-The rendered files only change when the school publishes a new plan: the image
-URL carries a content hash, so the committed JSON (and therefore the device
-screen) stays stable until the weekly PDF actually changes.
+Images are **not** committed to git — each run builds them fresh and deploys
+them as an ephemeral Pages artifact. That keeps the repo free of binary history
+bloat, and a removed school/grade simply stops being published (nothing to clean
+up). The polled JSON is content-only (its image URL carries a hash), so the
+device screen refreshes only when a school actually publishes a new plan.
 
 ## Repository layout
 
@@ -61,19 +62,15 @@ pyproject.toml           dependencies (managed with uv)
 
 ## Setup
 
-### 1. Enable GitHub Pages
-Repo **Settings → Pages → Build and deployment → Deploy from a branch**, then
-choose branch **main**, folder **/docs**, Save. The site will be at
-`https://thomasrolfsnes.github.io/trmnl_barneskole_arbeidsplaner/`.
+### 1. Enable GitHub Pages (via Actions)
+Repo **Settings → Pages → Build and deployment → Source: GitHub Actions**. The
+site will be at `https://thomasrolfsnes.github.io/trmnl_barneskole_arbeidsplaner/`.
+No branch/folder to pick — the workflow deploys the artifact.
 
 ### 2. Run the cron once
-Push to `main` (or **Actions → Build arbeidsplan images → Run workflow**). The
-job renders all grades and commits `docs/<school>/…`. The Pages base URL is
-derived automatically from the repo; override it with a repo variable
-`PAGES_BASE_URL` only if you use a custom domain.
-
-The workflow needs write access to push the generated images: repo
-**Settings → Actions → General → Workflow permissions → Read and write**.
+Push to `main` (or **Actions → Build & deploy arbeidsplaner → Run workflow**).
+The job renders all grades and deploys them to Pages. The base URL is taken from
+`actions/configure-pages`; nothing to configure for a standard project site.
 
 ### 3. Create the TRMNL plugin
 You need TRMNL Developer edition (one-time unlock). Then either:

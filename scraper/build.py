@@ -75,7 +75,7 @@ def write_json(path: Path, data) -> None:
 
 def summary(data: dict) -> dict:
     return {k: data[k] for k in
-            ("trinn", "trinn_label", "available", "uke", "image_url", "updated")}
+            ("trinn", "trinn_label", "available", "uke", "image_url")}
 
 
 def build_school(school: dict, base_url: str, device: str,
@@ -123,7 +123,7 @@ def build_school(school: dict, base_url: str, device: str,
                 "uke": plan["uke"], "title": plan["title"],
                 "image_url": image_url,
                 "source_pdf": plan["pdf_url"], "source_page": plan["page_url"],
-                "device": device, "content_hash": chash, "updated": now_iso(),
+                "device": device, "content_hash": chash,
             }
         else:
             print(f"  {sid} trinn {trinn}: no plan found -> placeholder")
@@ -139,7 +139,7 @@ def build_school(school: dict, base_url: str, device: str,
                 "uke": "", "title": "",
                 "image_url": image_url,
                 "source_pdf": "", "source_page": page_url_for(school, trinn),
-                "device": device, "content_hash": chash, "updated": now_iso(),
+                "device": device, "content_hash": chash,
             }
 
         if not dry_run:
