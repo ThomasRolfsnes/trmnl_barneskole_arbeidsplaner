@@ -19,6 +19,7 @@ on:
 # schools/grades simply stop being deployed.
 permissions:
   contents: read
+  actions: write   # keepalive: re-enable this workflow so the cron isn't auto-disabled
   pages: write
   id-token: write
 
@@ -57,3 +58,11 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      # GitHub disables scheduled workflows after 60 days without commits.
+      # Calling the enable endpoint resets that timer without committing anything.
+      - name: Keep schedule alive
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/build.yml/enable"
