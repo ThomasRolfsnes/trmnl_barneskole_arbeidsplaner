@@ -23,6 +23,8 @@ import re
 
 import requests
 from bs4 import BeautifulSoup
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 USER_AGENT = ("Mozilla/5.0 (compatible; trmnl-arbeidsplan/1.0; "
               "+https://github.com/usetrmnl)")
@@ -35,8 +37,17 @@ _WEEK_RE = re.compile(
     r"uke(?:plan)?\.?\s*([0-9]{1,2}(?:\s*(?:\+|og|,)\s*[0-9]{1,2})*)", re.I)
 
 
+# bergen.kommune.no occasionally answers 502/503 ("Backend fetch failed");
+# retry with backoff (~2+4+8+16s) before failing the build.
+_session = requests.Session()
+_session.headers["User-Agent"] = USER_AGENT
+_session.mount("https://", HTTPAdapter(max_retries=Retry(
+    total=4, backoff_factor=2, status_forcelist=(429, 500, 502, 503, 504),
+    allowed_methods=("GET",), raise_on_status=False)))
+
+
 def fetch(url: str) -> requests.Response:
-    resp = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=30)
+    resp = _session.get(url, timeout=30)
     resp.raise_for_status()
     return resp
 
